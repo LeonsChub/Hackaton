@@ -1,10 +1,29 @@
 import React,{useState} from 'react'
 import ChevronLeft from '@heroicons/react/24/solid/ChevronLeftIcon'
 import ChevronRight from '@heroicons/react/24/solid/ChevronRightIcon'
+import DateItem from './DateItem'
 
 function Calendar() {
     const [month, setmonth] = useState(new Date().getMonth())
     const [year, setYear] = useState(new Date().getFullYear())
+
+    function incrementMonth(){
+        if(month === 11){
+            setmonth( month => 0)
+            setYear( year => year + 1)
+        }else{
+            setmonth( month => month + 1)
+        }
+    }
+
+    function decrementMonth(){
+        if(month === 0){
+            setmonth( month => 11)
+            setYear( year => year - 1)
+        }else{
+            setmonth( month => month - 1)
+        }
+    }
 
     function formatMonth(month){
         switch (month) {
@@ -59,12 +78,38 @@ function Calendar() {
     }
 
     function renderDaysInMonth(month, year){
-        const daysRangeArray = new Array(getDaysOfMonth(month, year));
-        const divArr = [];
-        (daysRangeArray.map((day) => {divArr.push(<p>asd</p>)}))
+        const firstWeekDayOfMonth = new Date(year, month, 1).getDay()
+        //get first day of the mont to render properly
+        let daysRangeArray;
+        if(firstWeekDayOfMonth === 6){
+            daysRangeArray = [...new Array(42)];
+        }else{
+            daysRangeArray = [...new Array(35)];
+        }
+        //empty array to iterate over days
+        const monthLen = getDaysOfMonth(month,year)
 
-        console.log(divArr)
-        return divArr;
+        let prevMonthDays;
+
+        if(month === 0){
+            prevMonthDays = getDaysOfMonth(11, year-1)
+        }else{
+            prevMonthDays = getDaysOfMonth(month - 1, year)
+        }
+        
+
+        return daysRangeArray.map((element, index) => {
+            
+            if(index < firstWeekDayOfMonth){
+                return (<DateItem date={prevMonthDays + index - firstWeekDayOfMonth + 1}/>)
+            }
+            else if(index < monthLen + firstWeekDayOfMonth){
+                return (<DateItem date={index - firstWeekDayOfMonth + 1}/>)
+            }
+            else{
+                return (<DateItem date={index - (monthLen + firstWeekDayOfMonth) + 1}/>);
+            }
+        });
 
     }
 
@@ -78,7 +123,8 @@ function Calendar() {
             className="flex flex-row items-center justify-around p-2">
 
             <button 
-                className="rounded-full bg-slate-100">
+                className="rounded-full bg-slate-100 hover:bg-slate-400"
+                onClick={decrementMonth}>
                 <ChevronLeft 
                     className="block h-8 w-8 p-1" 
                     aria-hidden="true"/>
@@ -91,7 +137,8 @@ function Calendar() {
 
 
             <button 
-                className="rounded-full bg-slate-100">
+                className="rounded-full bg-slate-100 hover:bg-slate-400"
+                onClick={incrementMonth}>
                 <ChevronRight 
                     className="block h-8 w-8 p-1" 
                     aria-hidden="true"/>
