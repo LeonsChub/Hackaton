@@ -3,7 +3,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import MainPage from './components/MainPage'
 import CalendarPage from './components/CalendarPage'
-
+import MyEvents from './components/MyEvents'
 function App() {
 
   return (
@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage/>}/>
           <Route path='/calendar' element={<CalendarPage/>}/>
+          <Route path='/myEvents' element={<MyEvents/>}/>
         </Routes>
 
         <Footer/>
