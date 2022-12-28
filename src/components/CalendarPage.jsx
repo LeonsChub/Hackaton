@@ -1,12 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Calendar from './Calendar'
+import { AppContext } from './Context'
+import AddEvent from './AddEvent'
 
 function CalendarPage() {
+  const {modalEvent} = useContext(AppContext)
   return (
     <div 
         id='calendarContainer' 
-        className='grid grid-cols-4 ml-8 mt-5'>
-        <Calendar/>
+        className='flex flex-col items-center'>
+          <div className='w-11/12'>
+            <Calendar/>
+          </div>
+        {modalEvent && <AddEvent/>}
+
     </div>
   )
 }

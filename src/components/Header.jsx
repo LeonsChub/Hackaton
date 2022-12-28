@@ -1,28 +1,18 @@
-import { Popover} from '@headlessui/react'
 import SignUp from './SignUp'
 import { useState } from 'react';
 import Login from './Login';
+import React, { useContext } from "react";
 import { Link } from 'react-router-dom';
+import { AppContext } from './Context';
 export default function Header() {
-    const [modalOnSignUp,setModalOnSignUp] = useState(false);
-    const [modalOnLogin,setModalOnLogin] = useState(false);
-    const [loggedIn,setLoggedIn] = useState(false);
-    const handleClickedSignUp=()=>{
-        setModalOnSignUp(true)
-    }
-    const handleClickedLogin=()=>{
+    const {modalOnSignUp,modalOnLogin,loggedIn,handleClickedLogin,setModalOnSignUp,setModalOnLogin,handleLoggedIn,handleClickedSignUp,handleLogOut} = useContext(AppContext);
+    const handleClickedLogin1=()=>{
         setModalOnLogin(true)
-        setModalOnSignUp(false)
-    }
-    const handleLoggedIn=()=>{
-        setLoggedIn(true)
-        setModalOnLogin(false)
-
     }
   return (
-      <Popover className="relative bg-white">
-        {modalOnSignUp && <SignUp handleClickedLogin={()=>handleClickedLogin()} setModalOnSignUp={()=>setModalOnSignUp()}/>}
-        {modalOnLogin && <Login setModalOnLogin={()=>setModalOnLogin()} handleLoggedIn={()=>handleLoggedIn()}/>}
+      <div className="relative bg-white">
+        {modalOnSignUp && <SignUp/>}
+        {modalOnLogin && <Login/>}
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
           <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -36,15 +26,18 @@ export default function Header() {
           </div>
          
           <div className="items-center justify-end md:flex md:flex-1 lg:w-0"> {!loggedIn?<div>
-            <button onClick={()=>handleClickedLogin()}>
+            <button onClick={()=>handleClickedLogin()} className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600">
               Log in
             </button>
             <button onClick={()=>handleClickedSignUp()} className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
               Sign up
             </button>
-         </div>:<button className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">My Events</button>} </div>
+         </div>:<div>
+         <button onClick={()=>handleLogOut()} className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600">Logout</button>
+         <button className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">My Events</button></div>} 
+         </div>
         </div>
       </div>
-    </Popover>
+    </div>
   )
 }
