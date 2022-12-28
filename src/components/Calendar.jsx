@@ -78,6 +78,8 @@ function Calendar() {
     }
 
     function renderDaysInMonth(month, year){
+        const todaysDate = new Date(new Date().setHours(0,0,0,0));
+        //get todays date at midnight used to determine wheter date has already passed
         const firstWeekDayOfMonth = new Date(year, month, 1).getDay()
         //get first day of the mont to render properly
         let daysRangeArray;
@@ -143,7 +145,8 @@ function Calendar() {
                 };
             }
 
-            return <DateItem key={index} date = {date}/>
+            const datePassed = !(todaysDate <= new Date(date.year, date.month, date.day))
+            return <DateItem key={index} date={date} invalid={datePassed}/>
         });
 
     }

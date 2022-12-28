@@ -29,6 +29,7 @@ function renderOptions(){
 }
 
 const AddEvent = () => {
+    const {setModalOnSignUp,handleCloseEvent,eventDate,pushEvent} = useContext(AppContext);
     const uploadRef = useRef(null)
     const [uploadImg, setUploadImg] = useState(null)
     const [errors, setErrors] = useState({});
@@ -55,10 +56,22 @@ const AddEvent = () => {
         errors.chronology = 'Event end must come after event start'
       }
 
-      setErrors(errors)
+      
+      if(Object.keys(errors).length === 0 && errors.constructor === Object){
+        const eventToAdd = {
+          name: values.eventName,
+          description: values.eventDesc,
+          start: values.eventStart,
+          end: values.eventEnd,
+          date: eventDate,
+          eventPic:uploadImg,
+        }
+        pushEvent(eventToAdd)
+        handleCloseEvent()
+      }
+      setErrors(errors);
     }
 
-const {setModalOnSignUp,handleCloseEvent,eventDate} = useContext(AppContext);
 
     return ( 
         <div>

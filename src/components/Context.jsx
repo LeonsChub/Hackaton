@@ -8,10 +8,11 @@ const Context = (props) => {
     const [modalOnSignUp,setModalOnSignUp] = useState(false);
     const [modalOnLogin,setModalOnLogin] = useState(false);
     const [loggedIn,setLoggedIn] = useState(false);
+    const [support, setSupport] = useState(false);
 
     const [eventDate,setEventDate] = useState(null);
-
     const [modalEvent, setModalEvent] = useState(false);
+    const [eventsArr, setEventsArr] = useState([]);
 
     const handleClickedSignUp=()=>{
         setModalOnSignUp(true)
@@ -33,6 +34,12 @@ const Context = (props) => {
     const handleCloseEvent = ()=>{
       setModalEvent(false);
     }
+    const handleClickSupport=()=>{
+      setSupport(true);
+    }
+    const pushEvent =(newEvent)=>{
+      setEventsArr((prev)=>[...prev, newEvent])
+    }
   return (
     <AppContext.Provider value={
       {modalOnSignUp,
@@ -48,10 +55,18 @@ const Context = (props) => {
       handleShowEvent,
       handleCloseEvent,
       eventDate,
-      setEventDate,}}>
+      setEventDate,
+      support,
+      setSupport,
+      handleClickSupport,
+      eventsArr,
+      pushEvent,}}>
       {children}
     </AppContext.Provider>
   );
 };
 
 export default Context;
+
+
+

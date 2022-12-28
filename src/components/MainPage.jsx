@@ -1,10 +1,30 @@
 import {Link} from 'react-router-dom'
+import {BiSupport} from 'react-icons/bi'
+import { AppContext } from './Context';
+import React, { useContext } from "react";
+import Support from './Support';
 
 const MainPage = () => {
+    const { support,handleClickSupport} = useContext(AppContext);
+
     return ( 
         <div style={{height:'50rem'}} className="grid grid-cols-3 gap-4 flex" >
+            <div className='fixed mt-96 mr-auto right-5'>
+                {!support?<div>
+              <button onClick={()=>handleClickSupport()} className='transition duration-700 ease-in-out w-28 h-12 whitespace-nowrap rounded-full border border-transparent bg-indigo-800 text-base font-medium text-white shadow-sm hover:bg-indigo-900'>
+                <div className='grid grid-cols-8'>
+                    <div className='col-span-3'>
+                <BiSupport className='ml-2' size={22}/>
+                    </div>
+                    <div className='col-span-5 text-left'>
+                 support
+                    </div>
+                 </div></button></div>
+                 :<Support/>}
+            </div>
+          
             <div className="col-span-3 flex flex-col items-center">
-
+                
              <h1 className="text-7xl font-bold text-center mt-36">Events made easy</h1>
              <h1 className="text-3xl text-center mt-8">MyCalendar to manage your events from start to finish.</h1>
              <Link to="calendar">
