@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 const MainPage = () => {
     return ( 
         <div style={{height:'50rem'}} className="grid grid-cols-3 gap-4 flex" >
@@ -5,11 +7,17 @@ const MainPage = () => {
 
              <h1 className="text-7xl font-bold text-center mt-36">Events made easy</h1>
              <h1 className="text-3xl text-center mt-8">MyCalendar to manage your events from start to finish.</h1>
-             <button style={{width:'50vh'}} className="font-bold rounded-full text-white h-10 transition ease-in-out delay-150 bg-blue-500 hover:text-black hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 mt-16">Let's Start</button>
+             <Link to="calendar">
+                 <button
+                    style={{width:'50vh'}}
+                    className="font-bold rounded-full text-white h-10 transition ease-in-out delay-150 bg-blue-500 hover:text-black hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 mt-16">
+                        Let's Start
+                    </button>
+             </Link>
             </div>
 
             <div className="col-span-3 ">
-             <div class=" text-center flex flex-row bg-slate-200 rounded-lg w-11/12 h-60 mx-auto">
+             <div className=" text-center flex flex-row bg-slate-200 rounded-lg w-11/12 h-60 mx-auto">
                 <div className="basis-1/2">
                     <h1 className="text-4xl font-bold mt-6">Top-notch support</h1>
                     <h1 className="text-xl font-bold mt-10 ml-4">All of our features are backed by a knowledgeable support team.</h1>  
