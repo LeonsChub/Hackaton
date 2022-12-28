@@ -40,6 +40,16 @@ const Context = (props) => {
     const pushEvent =(newEvent)=>{
       setEventsArr((prev)=>[...prev, newEvent])
     }
+    const getEventsByDate = (date)=>{
+
+        return( eventsArr.filter((ev)=>{
+        return (
+          ev.date.getFullYear() === date.year 
+          && ev.date.getMonth() === date.month
+          && ev.date.getDate() === date.day ) 
+      }))
+      
+    }
   return (
     <AppContext.Provider value={
       {modalOnSignUp,
@@ -60,7 +70,8 @@ const Context = (props) => {
       setSupport,
       handleClickSupport,
       eventsArr,
-      pushEvent,}}>
+      pushEvent,
+      getEventsByDate}}>
       {children}
     </AppContext.Provider>
   );
