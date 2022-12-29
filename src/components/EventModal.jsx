@@ -22,15 +22,15 @@ const handleCancleClick=()=>{
           <div className="sm:flex sm:items-start items-center justify-center">
           
   <div className="w-full max-w-md space-y-8 ">
-  <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-  <div class=" grid grid-rows-2">
-    <div class="md:shrink-0 row-span-1">
-      <img class="h-48 w-full object-cover"src={eventPic !== null ? URL.createObjectURL(eventPic): ''}/>
+  <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+  <div className=" grid grid-rows-2">
+    <div className="md:shrink-0 row-span-1">
+      <img className="h-48 w-full object-cover"src={eventPic !== null ? URL.createObjectURL(eventPic): ''}/>
     </div>
-    <div class=" row-span-2">
-      <p  class="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-8">{eventName}</p>
-      <p class="mt-2 text-slate-500 mt-8">from:{eventFromTo[0]} to:{eventFromTo[1]}</p>
-      <p class="mt-2 text-slate-500 mt-8">{eventDescription}</p>
+    <div className=" row-span-2">
+      <p  className="block mt-1 text-lg leading-tight font-medium text-black hover:underline mt-8">{eventName}</p>
+      <p className="mt-2 text-slate-500 mt-8">from:{eventFromTo[0]} to:{eventFromTo[1]}</p>
+      <p className="mt-2 text-slate-500 mt-8">{eventDescription}</p>
     </div>
   </div>
 </div>

@@ -21,7 +21,7 @@ function DateItem({date, invalid}) {
       returnArr.push(
           <button onClick={(e)=> { setValues(ev.name,ev.description,ev.start,ev.end,ev.eventPic)}}
         key={index}
-        className='w-100 pl-1 my-1 mx-1 bg-indigo-600 text-white font-extralight rounded-sm'>
+        className='h-6 whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 text-white shadow-sm hover:bg-indigo-700'>
           {ev.name}</button>
       )
     })
@@ -33,15 +33,15 @@ function DateItem({date, invalid}) {
     setTodaysEvents(getEventsByDate(date))
   }, [date])
   return (
-    <div
-        className='h-48 border-y border-x border-zinc-300 bg-slate-100 hover:cursor-pointer hover:bg-slate-300'
+    <div className='relative h-48 border-y border-x border-zinc-300 bg-slate-100 hover:cursor-pointer hover:bg-slate-300 '>
+      {!invalid && <button className='absolute bottom-0 right-0  h-6 whitespace-nowrap rounded-md border border-transparent bg-green-600 px-4 text-white shadow-sm hover:bg-green-700'
         onClick={()=>{
             if(!invalid){
               setEventDate(new Date(date.year, date.month, date.day))
               handleShowEvent()
             }
            
-          }}>
+          }}>add</button>}
           <h1 className={`text-xl font-bold ml-4 ${invalid ? 'text-slate-500':''}`}>{date.day}</h1>
           <div className="eventsWrap">
             {renderEvents()}

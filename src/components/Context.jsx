@@ -10,6 +10,7 @@ const Context = (props) => {
     const [modalOnEvent,setModalOnEvent] = useState(false);
     const [loggedIn,setLoggedIn] = useState(false);
     const [support, setSupport] = useState(false);
+    const [needToLogin, setNeedToLogin] = useState(false);
 
     const [eventDate,setEventDate] = useState(null);
     const [modalEvent, setModalEvent] = useState(false);
@@ -81,11 +82,12 @@ const Context = (props) => {
       setEventName,
       setEventDescription,
       setEventFromTo,
+      setModalEvent,
       eventFromTo,
       eventDescription,
       eventName,
       setModalOnEvent,
-      modalOnEvent,eventPic, setPic}}>
+      modalOnEvent,eventPic, setPic,setNeedToLogin,needToLogin}}>
       {children}
     </AppContext.Provider>
   );

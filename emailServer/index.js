@@ -24,8 +24,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-
-
 app.post('/sendEmail',(req,res)=>{
   const emails = req.body.emails.join(',');
   const data = req.body.eventData;
