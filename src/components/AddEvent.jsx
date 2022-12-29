@@ -2,6 +2,7 @@ import {useFormik} from 'formik'
 import { AppContext} from './Context';
 import React, { useContext,useRef,useState } from "react";
 import {formatMonth} from './Calendar'
+import {AiOutlineCloseCircle} from 'react-icons/ai'
 
 function formatDate(day){
  if([4,5,6,7,8,9,0].includes(day % 10)){
@@ -30,10 +31,12 @@ function renderOptions(){
 
 const AddEvent = () => {
     const {setModalOnSignUp,handleCloseEvent,eventDate,pushEvent} = useContext(AppContext);
-    const uploadRef = useRef(null)
-    const [uploadImg, setUploadImg] = useState(null)
-    const [errors, setErrors] = useState({});
     const submitRef = useRef(null)
+    const uploadRef = useRef(null)
+    const emailRef = useRef(null)
+    const [uploadImg, setUploadImg] = useState(null)
+    const [invitees, setInvitees] = useState([]);
+    const [errors, setErrors] = useState({});
 
     const formik=useFormik({
     initialValues:{
@@ -56,6 +59,7 @@ const AddEvent = () => {
         errors.chronology = 'Event end must come after event start'
       }
 
+
       
       if(Object.keys(errors).length === 0 && errors.constructor === Object){
         const eventToAdd = {
@@ -72,6 +76,26 @@ const AddEvent = () => {
       setErrors(errors);
     }
 
+    function validateEmail(){
+      const email = emailRef.current.value
+      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+      if(emailRegex.test(email) && !invitees.includes(email)){
+        setInvitees(prev => [...prev, email])
+      }
+      emailRef.current.value = '';
+    }
+
+    function renderInvitees(){
+      const arrToReturn = [];
+      invitees.forEach((i)=>{
+        arrToReturn.push(
+        <button key={i} class="m-1 flex items-center px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded-full">
+          {i} <AiOutlineCloseCircle size={16} className='ml-1'/>
+      </button>)
+      })
+
+      return arrToReturn;
+    }
 
     return ( 
         <div>
@@ -80,7 +104,7 @@ const AddEvent = () => {
       <div className="fixed inset-0 z-10 overflow-y-auto">
          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+               <div className="bg-zinc-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start items-center justify-center">
                      <div className="w-full max-w-md space-y-8 ">
                         <div className='flex items-center justify-between'>
@@ -108,10 +132,10 @@ const AddEvent = () => {
                                           placeholder="Event name"
                                           required/>
 
-                                        <span
+                                        {errors.eventName && <span
                                           className='ml-1 text-red-500 text-xs'
                                           >{errors.eventName}
-                                          </span>
+                                          </span>}
 
                                        <textarea 
                                           onChange={formik.handleChange}  
@@ -123,6 +147,7 @@ const AddEvent = () => {
                                           placeholder="Description (Optional)"
                                           />
                                     </div>
+
                                     <div className="col-span-6 sm:col-span-3">
                                        <label 
                                           className="block text-sm font-medium text-gray-700"
@@ -152,10 +177,35 @@ const AddEvent = () => {
                                        </select>
                                     </div>
 
-                                    <span
-                                          className='ml-1 text-red-500 text-xs col-span-6'
-                                          >{errors.chronology}
-                                          </span>
+                                    {errors.chronology && <span
+                                      className='ml-1 text-red-500 text-xs col-span-6'
+                                      >{errors.chronology}
+                                    </span>}
+
+                                    <div className="col-span-6">
+                                      <label 
+                                        htmlFor="invites"
+                                        className='block text-sm font-medium text-gray-700 ml-1 mb-2'>Invite your friends</label>
+                                       <div className='flex'>
+                                         <input
+                                            id='invites'
+                                            type="text"
+                                            className="relative block w-full appearance-none rounded-l border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="Friend@Email.com"
+                                            ref={emailRef}
+                                            />
+                                         
+                                            <button
+                                            className='inline-flex items-center justify-center whitespace-nowrap rounded-r border border-transparent bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                                            onClick={(e)=>{e.preventDefault(); validateEmail()}}>
+                                              Add
+                                            </button>
+                                       </div>
+                                    </div>
+
+                                    <div className='col-span-6 flex flex-wrap'>
+                                      {renderInvitees()}
+                                    </div>
                                     
                                     <div className="col-span-6">
                                        <input

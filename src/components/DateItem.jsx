@@ -9,7 +9,7 @@ function DateItem({date, invalid}) {
       getEventsByDate,
     } = useContext(AppContext);
 
-  const [todaysEvents, setTodaysEvents] = useState(()=> getEventsByDate(date));
+  const [todaysEvents, setTodaysEvents] = useState([]);
     
   function renderEvents(){
     const returnArr = [];
