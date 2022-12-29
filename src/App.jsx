@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter className='fixed'>
         <Header/>
 
         <Routes>
@@ -17,7 +17,7 @@ function App() {
           <Route path='/myEvents' element={<MyEvents/>}/>
         </Routes>
 
-        <Footer/>
+        
       </BrowserRouter>
     </div>
   )
