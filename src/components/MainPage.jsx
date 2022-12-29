@@ -143,8 +143,8 @@ return (
       <img className="h-48 w-full object-cover md:h-full md:w-48" src="https://cdn.learnwoo.com/wp-content/uploads/2020/03/image3-2.png" alt="Modern building architecture"/>
     </div>
     <div className="p-8 bg-slate-100">
-      <div className="mt-10 uppercase tracking-wide text-sm text-indigo-500 font-semibold">Shopify</div>
-      <p className="mt-16 text-slate-500">Looking for buying the most high-quality clothes? welcome to shopify!</p>
+      <div className="mt-14 uppercase tracking-wide text-sm text-indigo-500 font-semibold">Shopify</div>
+      <p className="mt-16 text-slate-500">are Looking for buying the most high-quality clothes ? you have came to the right place shopify!</p>
     </div>
   </div>
 </div>
@@ -154,8 +154,8 @@ return (
       <img className="h-full w-full object-cover md:h-full md:w-48" src="https://www.tvbox.one/wp-content/uploads/2021/01/movily.jpg" alt="Modern building architecture"/>
     </div>
     <div className="p-8 bg-slate-100">
-      <div className="mt-10 uppercase tracking-wide text-sm text-indigo-500 font-semibold">Movily</div>
-      <p className="mt-16 text-slate-500"> Having a movie night and cant decide what movie to watch?, movily.</p>
+      <div className="mt-16 uppercase tracking-wide text-sm text-indigo-500 font-semibold">Movily</div>
+      <p className="mt-20 text-slate-500"> Having a movie night and cant decide what movie to watch?,we are here to help you movily.</p>
     </div>
   </div>
 </div>
@@ -165,8 +165,8 @@ return (
       <img className="h-full w-full object-cover md:h-full md:w-48" src="https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.6435-9/37698906_432030273977413_2656009768711225344_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=epG6fx9jcwoAX9p22R5&_nc_ht=scontent.fhfa1-1.fna&oh=00_AfAwWqFrnFgzBofk53LO6pqWllCfDq8t4Bwgji2SpQ2DJw&oe=63D4C6A3" alt="Modern building architecture"/>
     </div>
     <div className="p-8 bg-slate-100">
-      <div className="mt-14 uppercase tracking-wide text-sm text-indigo-500 font-semibold">CvMaker</div>
-      <p className="mt-20 text-slate-500">Have a job interview and dont have a cv? let us help you with cvMaker!.</p>
+      <div className="mt-16 uppercase tracking-wide text-sm text-indigo-500 font-semibold">CvMaker</div>
+      <p className="mt-20 text-slate-500">Have a job interview and dont have a cv? let us help you with,we are for you cvMaker!.</p>
     </div>
   </div>
 </div>
