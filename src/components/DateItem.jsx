@@ -3,23 +3,26 @@ import AddEvent from './AddEvent'
 import { AppContext } from './Context'
 
 function DateItem({date, invalid}) {
-  const {
-      handleShowEvent, 
-      setEventDate, 
-      getEventsByDate,
-    } = useContext(AppContext);
+  const {handleShowEvent, setEventDate, getEventsByDate, setEventName,setEventDescription,setEventFromTo,setModalOnEvent,setPic } = useContext(AppContext);
 
-  const [todaysEvents, setTodaysEvents] = useState([]);
+  const setValues=(name,description,start,end,pic)=>{
+      setEventName(name);
+        setEventDescription(description);
+        setEventFromTo([start,end]);
+        setModalOnEvent(true)
+        setPic(pic)
+  }
+  const [todaysEvents, setTodaysEvents] = useState(()=> getEventsByDate(date));
     
   function renderEvents(){
     const returnArr = [];
 
     todaysEvents.forEach((ev,index)=>{
       returnArr.push(
-        <p 
+          <button onClick={(e)=> { setValues(ev.name,ev.description,ev.start,ev.end,ev.eventPic)}}
         key={index}
         className='w-100 pl-1 my-1 mx-1 bg-indigo-600 text-white font-extralight rounded-sm'>
-          {ev.name}</p>
+          {ev.name}</button>
       )
     })
 

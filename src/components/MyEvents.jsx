@@ -1,14 +1,34 @@
+import { AppContext } from './Context';
+import React, { useContext } from "react";
+import {formatMonth} from './Calendar'
+
+
 const MyEvents = () => {
+    const {eventsArr } = useContext(AppContext);
+    function formatDate(day){
+        if([4,5,6,7,8,9,0].includes(day % 10)){
+         return `${day}th`
+        }else if(day % 10 === 3){
+         return `${day}rd`
+        }else if(day % 10 === 2){
+         return `${day}nd`
+        }else if(day % 10 === 1){
+         return `${day}st`
+        }
+       }
+      
     return ( 
+        
         <div class="grid grid-cols-3 gap-4 mt-4 min-h-screen">
-            <div className="h-80 bg-slate-100 drop-shadow-2xl">
-            <h1 className="text-2xl font-bold text-center mt-3">Date</h1>
-            <h1 className="text-2xl font-bold">event name</h1>
-            <h1 className="text-2xl font-bold mt-3">from: to:</h1>
-            <img className="h-32 w-full absolute bottom-0 " src="https://nmgprod.s3.amazonaws.com/media/files/28/09/28098119c156671e8255dedbc45f1db5/cover_image.jpg.760x400_q85_crop_upscale.jpg"/>
-            </div>
-            <div className="h-80 bg-slate-100 drop-shadow-2xl"></div>
-            <div className="h-80 bg-slate-100  drop-shadow-2xl"></div>
+            {eventsArr.map(ev=>ev=
+            <div className="h-96 bg-slate-100 drop-shadow-2xl">
+            <h1 className="text-2xl font-bold text-center mt-3">{` ${formatMonth(ev.date.getMonth())} ${formatDate(ev.date.getDate())} ${ev.date.getFullYear()}`}</h1>
+            <h1 className="text-2xl font-bold mt-4">{ev.name}</h1>
+            <p className="text-xl font-bold break-words mt-4">{ev.description}</p>
+            <h1 className="text-2xl font-bold mt-3">from:{ev.start} to:{ev.end}</h1>
+            <img className="h-32 w-full absolute bottom-0 "src={ev.eventPic !== null ? URL.createObjectURL(ev.eventPic) : ''} />
+            </div>)}
+           
         </div>
      );
 }

@@ -3,6 +3,7 @@ import { AppContext} from './Context';
 import React, { useContext,useRef,useState } from "react";
 import {formatMonth} from './Calendar'
 import {AiOutlineCloseCircle} from 'react-icons/ai'
+import axios from 'axios';
 
 function formatDate(day){
  if([4,5,6,7,8,9,0].includes(day % 10)){
@@ -47,6 +48,18 @@ const AddEvent = () => {
       }
     });
 
+    async function postEmailInvitations(){
+      const res = await axios({
+      method: 'post',
+        url: 'http://localhost:3000/sendEmail',
+        data: {
+          emails: invitees,
+          eventData: formik.values
+        }
+        });
+        console.log(res)
+      }
+
     function validate(values){
       let errors = {};
       if(!values.eventName){
@@ -58,8 +71,6 @@ const AddEvent = () => {
       if(startEv >= endEv){
         errors.chronology = 'Event end must come after event start'
       }
-
-
       
       if(Object.keys(errors).length === 0 && errors.constructor === Object){
         const eventToAdd = {
@@ -69,6 +80,9 @@ const AddEvent = () => {
           end: values.eventEnd,
           date: eventDate,
           eventPic:uploadImg,
+        }
+        if(invitees.length>0){
+          postEmailInvitations();
         }
         pushEvent(eventToAdd)
         handleCloseEvent()

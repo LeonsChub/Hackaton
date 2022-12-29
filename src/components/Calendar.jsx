@@ -1,7 +1,9 @@
-import React,{useState} from 'react'
+import React,{useState,useContext} from 'react'
 import ChevronLeft from '@heroicons/react/24/solid/ChevronLeftIcon'
 import ChevronRight from '@heroicons/react/24/solid/ChevronRightIcon'
 import DateItem from './DateItem'
+import EventModal from './EventModal'
+import { AppContext } from './Context';
 
 export const formatMonth = (month) =>{
         switch (month) {
@@ -36,6 +38,7 @@ export const formatMonth = (month) =>{
 function Calendar() {
     const [month, setmonth] = useState(new Date().getMonth())
     const [year, setYear] = useState(new Date().getFullYear())
+
 
     function incrementMonth(){
         if(month === 11){
@@ -150,12 +153,13 @@ function Calendar() {
         });
 
     }
-
-    
+    const{modalOnEvent,setModalOnEvent,eventsArr}=useContext(AppContext);
+    console.log(eventsArr);
   return (
     <div 
         className='flex flex-col col-span-3 rounded-lg'
         >
+            {modalOnEvent && <EventModal/>}
         <div 
             id="dateNav" 
             className="flex flex-row items-center justify-around p-2">

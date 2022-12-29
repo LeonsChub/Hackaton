@@ -7,12 +7,18 @@ const Context = (props) => {
 
     const [modalOnSignUp,setModalOnSignUp] = useState(false);
     const [modalOnLogin,setModalOnLogin] = useState(false);
+    const [modalOnEvent,setModalOnEvent] = useState(false);
     const [loggedIn,setLoggedIn] = useState(false);
     const [support, setSupport] = useState(false);
 
     const [eventDate,setEventDate] = useState(null);
     const [modalEvent, setModalEvent] = useState(false);
     const [eventsArr, setEventsArr] = useState([]);
+
+    const [eventName, setEventName] = useState([]);
+    const [eventDescription, setEventDescription] = useState([]);
+    const [eventFromTo, setEventFromTo] = useState([]);
+    const [eventPic, setPic] = useState([]);
 
     const handleClickedSignUp=()=>{
         setModalOnSignUp(true)
@@ -71,7 +77,15 @@ const Context = (props) => {
       handleClickSupport,
       eventsArr,
       pushEvent,
-      getEventsByDate}}>
+      getEventsByDate,
+      setEventName,
+      setEventDescription,
+      setEventFromTo,
+      eventFromTo,
+      eventDescription,
+      eventName,
+      setModalOnEvent,
+      modalOnEvent,eventPic, setPic}}>
       {children}
     </AppContext.Provider>
   );
