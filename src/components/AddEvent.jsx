@@ -85,11 +85,22 @@ const AddEvent = () => {
       emailRef.current.value = '';
     }
 
+    function rmEmail(email){
+      const index = (invitees.findIndex((invitee)=> invitee === email))
+      const temp = invitees;
+      temp.splice(index,1)
+      setInvitees([...temp])
+    }
+
     function renderInvitees(){
       const arrToReturn = [];
       invitees.forEach((i)=>{
         arrToReturn.push(
-        <button key={i} class="m-1 flex items-center px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded-full">
+        <button 
+          key={i} 
+          className="m-1 flex items-center px-2 py-1 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded-full"
+          onClick={(e)=> {e.preventDefault();rmEmail(i)}}
+          >
           {i} <AiOutlineCloseCircle size={16} className='ml-1'/>
       </button>)
       })
